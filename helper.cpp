@@ -55,7 +55,7 @@ Helper::Helper()
     penDate.setColor(QColor("#8994A6"));
     penDate.setWidth(1);
     fontPsw.setFamily("Noto Sans CJK SC");
-    fontPsw.setPixelSize(62);
+    fontPsw.setPixelSize(64);
     penPsw.setColor(QColor("#56BACA"));
     penPsw.setWidth(1);
 }
@@ -163,7 +163,10 @@ void Helper::paint_1_3(QPainter *painter, QPaintEvent *event, int nSeconds, int 
     painterImage.drawText(QRect(200,260,128,128),Qt::AlignRight,QString::number(nSeconds));
     painterImage.setPen(penPsw);
     painterImage.setFont(fontPsw);
-    painterImage.drawText(122,170,QString("*  ").repeated(nLength));
+    for(int i=0;i<nLength;i++)
+    {
+        painterImage.drawText(122+56*i,165,QString("*"));
+    }
     for(int i=0;i<12;i++)
     {
         if(bBtnPressed_1_3_Keypad[i])

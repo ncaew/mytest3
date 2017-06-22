@@ -55,7 +55,10 @@ void Window::paintEvent(QPaintEvent *event)
     case 2:
         --nCountdown_1_3;
         if(nCountdown_1_3==0)
+        {
             nCurrentImage = 0;
+            strPsw.clear();
+        }
         mHelper.paint_1_3(&painter,event,nCountdown_1_3/nFPS,strPsw.length());
         break;
     case 3:
