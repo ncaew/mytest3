@@ -1,5 +1,4 @@
 #include "window.h"
-
 #include <QGridLayout>
 #include <QLabel>
 #include <QTimer>
@@ -10,11 +9,20 @@
 
 Window::Window()
 {
-    setWindowTitle(tr("2D Painting on Native and OpenGL Widgets"));
+    setWindowTitle(tr("HHHHH"));
     this->resize(800,480);
-    setFixedSize(800,480);
     //setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
-    //showFullScreen();
+    qDebug()<<"currentCpuArchitecture:"<<QSysInfo::currentCpuArchitecture();
+    if(QSysInfo::currentCpuArchitecture().contains("x86_64"))
+    {
+        setFixedSize(800,480);
+        setCursor(Qt::PointingHandCursor);
+    }
+    else
+    {
+        showFullScreen();
+        setCursor(Qt::BlankCursor);
+    }
     //setWindowState(this->windowType() ^ Qt::Window);
     //setWindowState(this->windowState() ^ Qt::WindowFullScreen);
     //setWindowState(Qt::WindowFullScreen);
@@ -25,6 +33,20 @@ Window::Window()
     connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
     timer->start(1000/nFPS);
 
+    QTimer::singleShot(1000, this, &Window::startUp);
+}
+
+void Window::startUp()
+{
+    qDebug()<<__FUNCTION__;
+    mAssist.setUrlWebSocket("ws://192.168.234.100:8888/ws");
+    mAssist.openWebSocket();
+    mAssist.setUrlHttpRequest("http://192.168.234.100:8888");
+    mAssist.openHttpRequest();
+
+    QObject::connect(&mAssist,&Assist::dataReady,this,&Window::dataParser);
+
+    QTimer::singleShot(1000, &mAssist, &Assist::onStartUpSingleShot);
 }
 
 void Window::animate()
@@ -221,5 +243,21 @@ void Window::mousePressEvent(QMouseEvent * event)
     default:
         break;
     }
+
+}
+
+void Window::setCurrentImage(int nImage)
+{
+    qDebug()<<__FUNCTION__<<nImage;
+    nCurrentImage = nImage;
+}
+
+void Window::dataParser(QByteArray ba)
+{
+    qDebug()<<__FUNCTION__;
+    qDebug()<<"    size:"<<ba.size();
+    qDebug()<<"    data:"<<ba;
+
+    //分析json决定　setCurrentImage　到哪个页面
 
 }

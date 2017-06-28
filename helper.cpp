@@ -1,10 +1,4 @@
 #include "helper.h"
-#include <QPainter>
-#include <QPaintEvent>
-#include <QWidget>
-#include <QDateTime>
-#include <QDebug>
-#include <QTranslator>
 
 Helper::Helper()
 {
@@ -36,7 +30,7 @@ Helper::Helper()
         rectBtn_1_3_Keypad[i].setY(pointKeypad[i].y()-30);
         rectBtn_1_3_Keypad[i].setWidth(60);
         rectBtn_1_3_Keypad[i].setHeight(60);
-        qDebug()<<rectBtn_1_3_Keypad[i];
+        //qDebug()<<rectBtn_1_3_Keypad[i];
         bBtnPressed_1_3_Keypad[i] = false;
     }
 

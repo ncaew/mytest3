@@ -2,6 +2,7 @@
 #define WINDOW_H
 
 #include "helper.h"
+#include "assist.h"
 #include <QWidget>
 
 class Window : public QWidget
@@ -10,6 +11,7 @@ class Window : public QWidget
 
 public:
     Window();
+    void setCurrentImage(int nImage);
 
 private:
     int nFPS = 40; // refresh per second
@@ -17,9 +19,12 @@ private:
     Helper mHelper;
     int nCurrentImage;
     QString strPsw;
+    Assist mAssist;
 
 public slots:
     void animate();
+    void startUp();
+    void dataParser(QByteArray ba);
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;

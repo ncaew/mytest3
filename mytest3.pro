@@ -1,4 +1,5 @@
-QT += core widgets gui webkitwidgets network
+
+QT += core widgets gui webkitwidgets network websockets
 
 TARGET = mytest3
 
@@ -9,12 +10,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     window.cpp \
-    helper.cpp
+    helper.cpp \
+    assist.cpp
 
 HEADERS += \
     window.h \
-    helper.h
+    helper.h \
+    assist.h
 
 RESOURCES += \
     resource.qrc
+
 

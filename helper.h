@@ -1,13 +1,20 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#include <QObject>
 #include <QBrush>
 #include <QFont>
 #include <QPen>
+#include <QPainter>
+#include <QPaintEvent>
 #include <QWidget>
+#include <QDateTime>
+#include <QDebug>
 
-class Helper
+class Helper : public QObject
 {
+    Q_OBJECT
+
 public:
     Helper();
 
@@ -34,6 +41,7 @@ public:
     QRect rectBtn_1_2_locking;
     QRect rectBtn_1_3_Keypad[12];
     QRect rectBtn_1_7_locked;
+
 private:
     QImage mImage_1_1;
     QImage mImage_1_2;
